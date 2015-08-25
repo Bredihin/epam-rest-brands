@@ -97,7 +97,7 @@
 <script type="text/javascript">
  
 function addRow() {
- 
+ //yeah
  // Get the currently selected row
     jQuery("#userTable").jqGrid('editGridRow','new',
       {  url: "/rest/users/add", 
