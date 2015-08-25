@@ -39,7 +39,7 @@ public class BrandController {
 	@RequestMapping(value = "/json", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<List<Brand>> getBrandsJson(Model model) throws Exception {
-		logger.debug("Received request to show all brands");
+		logger.debug("Received requ 	est to show all brands");
 		List<Brand> brands = brandServices.getBrandList();
 		return new ResponseEntity<List<Brand>>(brands, HttpStatus.OK);
 	}

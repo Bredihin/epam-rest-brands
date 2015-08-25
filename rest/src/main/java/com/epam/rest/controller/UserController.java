@@ -1,6 +1,8 @@
 package com.epam.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.epam.rest.entity.Show;
+import com.epam.rest.entity.SubscriptionShow;
 import com.epam.rest.entity.User;
+import com.epam.rest.service.ShowService;
 import com.epam.rest.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/users")
@@ -24,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	UserService userServices;
+
+	@Autowired
+	ShowService showServices;
 
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
@@ -35,17 +44,21 @@ public class UserController {
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
 
-	// @RequestMapping(value = "/subscriptions", produces = {
-	// MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
-	// @ResponseBody
-	// public ResponseEntity<Set<SubscriptionShow>>
-	// getSubscriptionShow(@RequestParam(value = "id", required = true) Integer
-	// id, Model model) throws Exception {
-	// Set<SubscriptionShow> subscriptionShow =
-	// userServices.getUserById(id).getSubscriptionsShow();
-	// return new ResponseEntity<Set<SubscriptionShow>>(subscriptionShow,
-	// HttpStatus.OK);
-	// }
+	@RequestMapping(value = "/subscriptions", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<List<Show>> getSubscriptionShow(@RequestParam(value = "id", required = true) Integer id, Model model) throws Exception {
+		Set<SubscriptionShow> subscriptionShow = userServices.getUserById(id).getSubscriptionsShow();
+		List<Show> shows = new ArrayList<Show>();
+		for (Show show : showServices.getShowList()) {
+			for (SubscriptionShow sh : subscriptionShow) {
+				if (sh.getSubscriptionShowId() == show.getShowId())
+					shows.add(show);
+			}
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println(mapper.writeValueAsString(shows));
+		return new ResponseEntity<List<Show>>(shows, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getUsers(Model model) throws Exception {

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "rest.brand")
 // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -26,6 +28,7 @@ public class Brand {
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "showBrandId")
+	@JsonManagedReference
 	private Set<Show> shows = new HashSet<Show>();
 
 	public Brand() {

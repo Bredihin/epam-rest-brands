@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "rest.show")
 // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -24,6 +27,7 @@ public class Show {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "showBrandId", nullable = false)
+	@JsonBackReference
 	private Brand showBrand;
 
 	@Column(name = "showName")
@@ -34,10 +38,12 @@ public class Show {
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "episodeShowId")
+	@JsonManagedReference
 	private Set<Episode> episodes = new HashSet<Episode>();
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Show_showId")
+	@JsonManagedReference
 	private Set<SubscriptionShow> subscriptions = new HashSet<SubscriptionShow>();
 
 	public Set<SubscriptionShow> getSubscriptions() {

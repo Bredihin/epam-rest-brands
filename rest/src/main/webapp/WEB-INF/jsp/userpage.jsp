@@ -58,14 +58,34 @@
 			height : 200,
 			pager : "#userPagingDiv",
 			viewrecords : true,
-			caption : "Users"
+			subGrid: true,
+			caption : "Users",
+		    subGridOptions: {
+		    	"plusicon" : "ui-icon-triangle-1-e",
+		    	"minusicon" : "ui-icon-triangle-1-s",
+		    	"openicon" : "ui-icon-arrowreturn-1-e",
+		    	"reloadOnExpand" : false, 
+		    	"selectOnExpand" : true
+		    },
+		    subGridRowExpanded: function(subgrid_id, row_id) {
+		    	var subgrid_table_id, pager_id;
+		    		subgrid_table_id = subgrid_id+"_t";
+		    		pager_id = "p_"+subgrid_table_id; 
+		    		$("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+		   			jQuery("#"+subgrid_table_id).jqGrid({
+		    			url:"users/subscriptions/?id="+row_id,
+		    			datatype: "json",
+		    			colNames: ['showId','showName'], 
+		    			colModel: [ {name:"showId",index:"showId",width:180,key:true}  ,{name:"showName",index:"showName",width:180,key:true}      ],
+		    			rowNum:20,
+		    			pager: pager_id,
+		    			height: '100%' 
+		    		});
+		    		jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{edit:true,add:true,del:true})
+		    		} 
+		    
 		});
-		 jQuery("#userTable").jqGrid('navGrid', '#userPagingDiv', {
-             edit : true,
-             add : true,
-             del : true,
-             search : true
-         },{url: 'rest/users/edit'},{url: 'rest/users/add'});
+		 	jQuery("#userTable").jqGrid('navGrid', '#userPagingDiv', {edit : true,add : true,del : true,search : true},	 {url: 'rest/users/edit'}, {url: 'rest/users/add'});
  
 	});
 

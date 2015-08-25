@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "rest.subscriptionshow")
 public class SubscriptionShow {
@@ -19,10 +21,12 @@ public class SubscriptionShow {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "User_userId", nullable = false)
+	@JsonBackReference
 	private User subscriptionUser;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Show_showId", nullable = false)
+	@JsonBackReference
 	private Show subscriptionShow;
 
 	public int getSubscriptionShowId() {

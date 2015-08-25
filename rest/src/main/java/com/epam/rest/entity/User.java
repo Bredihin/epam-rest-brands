@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "rest.user")
 // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -32,6 +34,7 @@ public class User implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "User_userId")
+	@JsonManagedReference
 	private Set<SubscriptionShow> subscriptionsShow = new HashSet<SubscriptionShow>();
 
 	public User() {
