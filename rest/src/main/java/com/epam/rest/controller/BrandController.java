@@ -1,6 +1,7 @@
 package com.epam.rest.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.epam.rest.entity.Brand;
+import com.epam.rest.entity.Episode;
 import com.epam.rest.entity.Show;
 import com.epam.rest.service.BrandService;
 import com.epam.rest.service.ShowService;
@@ -33,32 +35,30 @@ public class BrandController {
 		logger.debug("Received request to show all brends");
 		List<Brand> brands = brandServices.getBrandList();
 		model.addAttribute("brands", brands);
-		return "brandspage";
+		return "brands";
 	}
 
 	@RequestMapping(value = "/json", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<List<Brand>> getBrandsJson(Model model) throws Exception {
-		logger.debug("Received requ 	est to show all brands");
 		List<Brand> brands = brandServices.getBrandList();
 		return new ResponseEntity<List<Brand>>(brands, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/json1", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
+	@RequestMapping(value = "/shows", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
 	@ResponseBody
-	public String getBrandsJson1(Model model) throws Exception {
-		logger.debug("Received request to show all brands");
-		List<Brand> brands = brandServices.getBrandList();
-		for (Brand brand : brands) {
-			System.out.println(brand.getBrandName());
-			for (Show show : brand.getShows())
-				System.out.println(show.getShowName());
-		}
+	public ResponseEntity<Set<Show>> getShow(@RequestParam(value = "id") Integer id, Model model) throws Exception {
+		Brand brand = brandServices.getBrandById(id);
+		Set<Show> shows = brand.getShows();
+		return new ResponseEntity<Set<Show>>(shows, HttpStatus.OK);
+	}
 
-		// ObjectWriter ow = new
-		// ObjectMapper().writer().withDefaultPrettyPrinter();
-		// String json = ow.writeValueAsString(brands);
-		return "";
+	@RequestMapping(value = "/shows/episodes", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Set<Episode>> getEpisodes(@RequestParam(value = "id") Integer id, Model model) throws Exception {
+		Show show = showServices.getShowById(id);
+		Set<Episode> episodes = show.getEpisodes();
+		return new ResponseEntity<Set<Episode>>(episodes, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)

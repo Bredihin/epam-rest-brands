@@ -22,7 +22,6 @@ import com.epam.rest.entity.SubscriptionShow;
 import com.epam.rest.entity.User;
 import com.epam.rest.service.ShowService;
 import com.epam.rest.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/users")
@@ -55,8 +54,7 @@ public class UserController {
 					shows.add(show);
 			}
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(mapper.writeValueAsString(shows));
+
 		return new ResponseEntity<List<Show>>(shows, HttpStatus.OK);
 	}
 
