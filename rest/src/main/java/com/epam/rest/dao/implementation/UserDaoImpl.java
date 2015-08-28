@@ -44,7 +44,8 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
-	public boolean editUser(int id) throws Exception {
+	public boolean editUser(User user) throws Exception {
+		sessionFactory.getCurrentSession().update(user);
 		return false;
 	}
 }

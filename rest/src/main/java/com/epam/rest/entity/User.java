@@ -9,9 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "rest.user")
@@ -30,8 +31,8 @@ public class User implements Serializable {
 	@Column(name = "userIdentifier")
 	private long userUniqueIdentity;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "User_userId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subscriptionUser")
+	@JsonManagedReference
 	private Set<SubscriptionShow> subscriptionsShow = new HashSet<SubscriptionShow>();
 
 	public User() {

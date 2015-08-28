@@ -11,5 +11,7 @@ public interface ShowService {
 
 	public List<Show> getShowList() throws Exception;
 
+	public void editShow(Show show) throws Exception;
+
 	public void deleteShow(int id) throws Exception;
 }

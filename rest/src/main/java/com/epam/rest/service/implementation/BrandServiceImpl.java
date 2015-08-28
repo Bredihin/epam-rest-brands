@@ -33,4 +33,9 @@ public class BrandServiceImpl implements BrandService {
 		brandDAO.deleteBrand(id);
 	}
 
+	@Transactional
+	public void editBrand(Brand brand) throws Exception {
+		brandDAO.editBrand(brand);
+	}
+
 }

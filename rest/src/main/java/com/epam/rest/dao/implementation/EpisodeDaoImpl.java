@@ -18,7 +18,7 @@ public class EpisodeDaoImpl implements EpisodeDao {
 		sessionFactory.getCurrentSession().save(episode);
 	}
 
-	public Episode getEpisodeById(long id) throws Exception {
+	public Episode getEpisodeById(int id) throws Exception {
 		return (Episode) sessionFactory.getCurrentSession().load(Episode.class, id);
 	}
 
@@ -27,11 +27,15 @@ public class EpisodeDaoImpl implements EpisodeDao {
 		return sessionFactory.getCurrentSession().createCriteria(Episode.class).list();
 	}
 
-	public void deleteEpisode(long id) throws Exception {
+	public void deleteEpisode(int id) throws Exception {
 		Episode episode = (Episode) sessionFactory.getCurrentSession().load(Episode.class, id);
 		if (null != episode) {
 			sessionFactory.getCurrentSession().delete(episode);
 		}
+	}
+
+	public void editEpisode(Episode episode) throws Exception {
+		sessionFactory.getCurrentSession().update(episode);
 	}
 
 }

@@ -11,7 +11,7 @@ public interface UserService {
 
 	public List<User> getUserList() throws Exception;
 
-	public boolean editUser(int id) throws Exception;
+	public boolean editUser(User user) throws Exception;
 
 	public boolean deleteUser(int id) throws Exception;
 

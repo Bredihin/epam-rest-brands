@@ -1,8 +1,8 @@
-package com.epam.rest.dao;
+package com.epam.rest.service;
 
 import com.epam.rest.entity.SubscriptionShow;
 
-public interface SubscriptionShowDao {
+public interface SubscriptionShowService {
 	public void addSubscriptionShow(SubscriptionShow subscriptionShow) throws Exception;
 
 	public SubscriptionShow getSubscriptionShowById(int id) throws Exception;
