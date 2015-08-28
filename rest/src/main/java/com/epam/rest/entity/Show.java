@@ -36,13 +36,11 @@ public class Show {
 	@Column(name = "showDescription")
 	private String showDescription;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "episodeShowId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "episodeShow")
 	@JsonManagedReference
 	private Set<Episode> episodes = new HashSet<Episode>();
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Show_showId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subscriptionShow")
 	@JsonManagedReference
 	private Set<SubscriptionShow> subscriptions = new HashSet<SubscriptionShow>();
 

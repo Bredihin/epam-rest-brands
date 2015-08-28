@@ -22,7 +22,7 @@
 	src="http://trirand.com/blog/jqgrid/js/jquery.jqGrid.min.js"></script>
 <style type='text/css'>
 </style>
-<script type='text/javascript' src="<spring:url value="/resources/brandTable.js"/>"></script>
+<script type='text/javascript' src="<spring:url value="/resources/javaScript/tempBrand.js"/>"></script>
 <link rel="stylesheet" type="text/css" media="screen"
 	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery.ui.base.css" />
 <link rel="stylesheet" type="text/css" media="screen"

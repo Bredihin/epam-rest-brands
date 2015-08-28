@@ -66,4 +66,6 @@
 	<bean id="showServices" class="com.epam.rest.service.implementation.ShowServiceImpl"></bean>
 	<bean id="episodeDao" class="com.epam.rest.dao.implementation.EpisodeDaoImpl"></bean>
 	<bean id="episodeServices" class="com.epam.rest.service.implementation.EpisodeServiceImpl"></bean>
+	<bean id="subscriptionShowDao" class="com.epam.rest.dao.implementation.SubscriptionShowDaoImpl"></bean>
+	<bean id="subscriptionShowServices" class="com.epam.rest.service.implementation.SubscriptionShowServiceImpl"></bean>
 </beans>

@@ -13,7 +13,7 @@ public interface UserDao {
 
 	public boolean deleteUser(int id) throws Exception;
 
-	public boolean editUser(int id) throws Exception;
+	public boolean editUser(User user) throws Exception;
 
 	public boolean addSubscription(int id) throws Exception;
 }

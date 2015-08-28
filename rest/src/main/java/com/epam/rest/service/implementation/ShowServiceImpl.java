@@ -33,4 +33,9 @@ public class ShowServiceImpl implements ShowService {
 		showDAO.deleteShow(id);
 	}
 
+	@Transactional
+	public void editShow(Show show) throws Exception {
+		showDAO.editShow(show);
+	}
+
 }

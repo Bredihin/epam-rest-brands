@@ -35,8 +35,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public boolean editUser(int id) throws Exception {
-		return userDao.editUser(id);
+	public boolean editUser(User user) throws Exception {
+		return userDao.editUser(user);
 	}
 
 }

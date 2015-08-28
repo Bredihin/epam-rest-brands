@@ -16,7 +16,7 @@ public class EpisodeServiceImpl implements EpisodeService {
 		episodeDAO.addEpisode(episode);
 	}
 
-	public Episode getEpisodeById(long id) throws Exception {
+	public Episode getEpisodeById(int id) throws Exception {
 		return episodeDAO.getEpisodeById(id);
 	}
 
@@ -24,8 +24,12 @@ public class EpisodeServiceImpl implements EpisodeService {
 		return episodeDAO.getEpisodeList();
 	}
 
-	public void deleteEpisode(long id) throws Exception {
+	public void deleteEpisode(int id) throws Exception {
 		episodeDAO.deleteEpisode(id);
+	}
+
+	public void editEpisode(Episode episode) throws Exception {
+		episodeDAO.editEpisode(episode);
 	}
 
 }

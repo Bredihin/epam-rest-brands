@@ -20,7 +20,7 @@ public class SubscriptionShow {
 	private int subscriptionShowId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "User_userId", nullable = false)
+	@JoinColumn(name = "User_userId")
 	@JsonBackReference
 	private User subscriptionUser;
 

@@ -36,4 +36,8 @@ public class BrandDaoImpl implements BrandDao {
 
 	}
 
+	public void editBrand(Brand brand) throws Exception {
+		sessionFactory.getCurrentSession().update(brand);
+	}
+
 }

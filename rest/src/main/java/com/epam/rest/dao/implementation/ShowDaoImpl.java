@@ -34,4 +34,8 @@ public class ShowDaoImpl implements ShowDao {
 		}
 	}
 
+	public void editShow(Show show) throws Exception {
+		sessionFactory.getCurrentSession().update(show);
+	}
+
 }

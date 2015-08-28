@@ -23,7 +23,7 @@
 <style type='text/css'>
 </style>
 
-<script type='text/javascript' src="<spring:url value="/resources/userTable.js"/>"></script>
+<script type='text/javascript' src="<spring:url value="/resources/javaScript/userTable.js"/>"></script>
 
 <link rel="stylesheet" type="text/css" media="screen"
 	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery.ui.base.css" />

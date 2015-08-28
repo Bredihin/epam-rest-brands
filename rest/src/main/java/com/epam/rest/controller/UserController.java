@@ -21,6 +21,7 @@ import com.epam.rest.entity.Show;
 import com.epam.rest.entity.SubscriptionShow;
 import com.epam.rest.entity.User;
 import com.epam.rest.service.ShowService;
+import com.epam.rest.service.SubscriptionShowService;
 import com.epam.rest.service.UserService;
 
 @Controller
@@ -33,6 +34,8 @@ public class UserController {
 	@Autowired
 	ShowService showServices;
 
+	@Autowired
+	SubscriptionShowService subscriptionShowServices;
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/json", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
@@ -66,41 +69,46 @@ public class UserController {
 		return "userpage";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAdd(Model model) {
-		logger.debug("Received request to show add page");
-		model.addAttribute("userAttribute", new User());
-		return "addpage";
-	}
-
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute("userAttribute") User user) throws Exception {
+	public String addUser(@ModelAttribute("userAttribute") User user) throws Exception {
 		logger.debug("Received request to add new user");
 		userServices.addUser(user);
-		return "addedpage";
-	}
-
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", required = true) Integer id, Model model) throws Exception {
-
-		logger.debug("Received request to delete existing user");
-		userServices.deleteUser(id);
-		model.addAttribute("id", id);
-		return "deletedpage";
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String getEdit(@RequestParam(value = "id", required = true) Integer id, Model model) throws Exception {
-		logger.debug("Received request to show edit page");
-		model.addAttribute("userAttribute", userServices.getUserById(id));
-		return "editpage";
+		return "userpage";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("userAttribute") User user, @RequestParam(value = "id", required = true) Integer id, Model model) throws Exception {
+	public String editUser(@ModelAttribute("userAttribute") User user, @RequestParam(value = "userId", required = true) Integer id, Model model) throws Exception {
 		logger.debug("Received request to update user");
-		userServices.editUser(user.getUserId());
-		model.addAttribute("id", id);
-		return "editedpage";
+		userServices.editUser(user);
+		return "userpage";
 	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String deleteUser(@RequestParam(value = "userId", required = true) Integer id) throws Exception {
+		logger.debug("Received request to delete existing user");
+		userServices.deleteUser(id);
+		return "userpage";
+	}
+
+	@RequestMapping(value = "/subscriptions/add", method = RequestMethod.POST)
+	public String addSubscriptions(@ModelAttribute("userAttribute") SubscriptionShow subscriptionShow) throws Exception {
+		logger.debug("Received request to add new subscriptionShowId");
+		subscriptionShowServices.addSubscriptionShow(subscriptionShow);
+		return "userpage";
+	}
+
+	@RequestMapping(value = "/subscriptions/edit", method = RequestMethod.POST)
+	public String editSubscriptions(@ModelAttribute("userAttribute") SubscriptionShow subscriptionShow) throws Exception {
+		logger.debug("Received request to add new subscriptionShowId");
+		// subscriptionShowServices.editSubscriptionShow(subscriptionShow);
+		return "userpage";
+	}
+
+	@RequestMapping(value = "/subscriptions/delete", method = RequestMethod.POST)
+	public String deleteSubscriptions(@RequestParam(value = "subscriptionShowId", required = true) Integer id) throws Exception {
+		logger.debug("Received request to delete existing subscriptionShowId");
+		subscriptionShowServices.deleteSubscriptionShow(id);
+		return "userpage";
+	}
+
 }

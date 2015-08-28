@@ -11,5 +11,7 @@ public interface BrandDao {
 
 	public List<Brand> getBrandList() throws Exception;
 
+	public void editBrand(Brand brand) throws Exception;
+
 	public void deleteBrand(int id) throws Exception;
 }
